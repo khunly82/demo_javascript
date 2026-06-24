@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+* {
+  font-family: Permanent Marker;
+  letter-spacing: 0.1em;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
+}
