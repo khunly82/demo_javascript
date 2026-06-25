@@ -9,7 +9,7 @@ const inputEndDate = document.getElementById('input-end-date')
 const inputTaskImportant = document.getElementById('input-task-important')
 const btnAdd = document.getElementById('btn-add')
 const tbodyTasks = document.getElementById('tbody-tasks')
-const sortButtons = document.querySelectorAll('#sort-buttons > button')
+const sortButtons = document.querySelectorAll('#sort-buttons')
 
 const tasksList = []
 // events
@@ -29,9 +29,9 @@ btnAdd.addEventListener('click', _ => {
 })
 
 
-for (const element of sortButtons) {
-    element.addEventListener('click', e => {
-        const dset = e.currentTarget.dataset
+// for (const element of sortButtons) {
+    sortButtons.addEventListener('click', function(e)  {
+        const dset = e.target.dataset
         if(!tasksList.length) {
             return
         }
@@ -46,13 +46,9 @@ for (const element of sortButtons) {
             )
         }
         tbodyTasks.innerHTML = ''
-        // for(const t of sortedList) {
-        //     tbodyTasks.append(createRow(t))
-        // }
-        // console.log(sortedList.map(createRow))
         tbodyTasks.append(...sortedList.map(createRow))
     })
-}
+// }
 
 /**
  * @param {{ name: string, dev: string, endDate: Date, important: boolean }} task 
@@ -72,9 +68,6 @@ function createRow(task) {
     tdActions.append(deleteBtn)
     row.append(tdName, tdDev, tdDate, tdActions)
     task.important && row.classList.add('important')
-    // if(task.important) {
-    //     row.classList.add('important')
-    // }
     deleteBtn.addEventListener('click', _ => {
         row.remove()
     })

@@ -69,50 +69,76 @@
 //     pResult.textContent = `The date is ${date.toLocaleDateString()}`
 // })
 
-const myObject = {
-    isbn: '999999999999',
-    title: 'The lord of the ring',
-    'number-of-pages': 1000,
-    isInEnglish: true,
-    author: {
-        name: 'Tolkien',
-        nationality: 'usa'
-    },
-    categories: ['Adventure']
-}
+// const myObject = {
+//     isbn: '999999999999',
+//     title: 'The lord of the ring',
+//     'number-of-pages': 1000,
+//     isInEnglish: true,
+//     author: {
+//         name: 'Tolkien',
+//         nationality: 'usa'
+//     },
+//     categories: ['Adventure']
+// }
 
-const myOtherObject = {
-    isbn: '5654655555',
-    title: 'The bible',
-    author: null
-}
+// const myOtherObject = {
+//     isbn: '5654655555',
+//     title: 'The bible',
+//     author: null
+// }
 
-console.log(myObject.author.name)
-console.log(myObject['author'].name)
+// console.log(myObject.author.name)
+// console.log(myObject['author'].name)
 
-console.log(myObject['number-of-pages'])
+// console.log(myObject['number-of-pages'])
 
-// you can't add new property to an object that is sealed
-// Object.seal(myObject)
+// // you can't add new property to an object that is sealed
+// // Object.seal(myObject)
 
-myObject.releaseDate = new Date(1970, 1, 1)
+// myObject.releaseDate = new Date(1970, 1, 1)
 
-// you can't update any proprterty of an object that frozen
-// Object.freeze(myObject)
-myObject.isbn = '666666666'
+// // you can't update any proprterty of an object that frozen
+// // Object.freeze(myObject)
+// myObject.isbn = '666666666'
 
-console.log(myObject)
+// console.log(myObject)
 
-console.log(Object.getOwnPropertyNames(myObject))
+// console.log(Object.getOwnPropertyNames(myObject))
 
-for(const value of Object.values(myObject)) {
-    console.log(value)
-}
+// for(const value of Object.values(myObject)) {
+//     console.log(value)
+// }
 
-console.log(myObject.author?.name ?? 'No Author')
-console.log(myOtherObject.author?.name || 'No Author')
+// console.log(myObject.author?.name ?? 'No Author')
+// console.log(myOtherObject.author?.name || 'No Author')
 
 
-const age = 42
+// const age = 42
 
-console.log(`j\'ai ${age} ans`)
+// console.log(`j\'ai ${age} ans`)
+
+// let i = 0
+
+// while(i < 10){
+//     console.log(i)
+//     i++
+// }
+
+// for (let i = 0; i < 10; i++) {
+//     console.log(i)
+// }
+
+
+// function test() {
+//     console.log(42)
+// }
+
+// const test2 = function() {
+//     console.log(44)
+// }
+
+// function test() {
+//     console.log(45)
+// }
+
+// console.log = function() { return ('Trololo') }
