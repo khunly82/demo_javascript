@@ -1,3 +1,7 @@
+/**
+ * @typedef {{name: string, dev: string, endDate: Date, important: boolean}} Task
+ */
+
 // DOM
 /** @type {HTMLFormElement} */
 const form = document.getElementById('form')
@@ -16,7 +20,7 @@ const tbodyTasks = document.getElementById('tbody-tasks')
 /** @type {HTMLElement} */
 const sortButtons = document.querySelector('#sort-buttons')
 
-/** @type {{name: string, dev: string, endDate: Date, important: boolean}[]} */
+/** @type {Task[]} */
 const tasksList = []
 // events
 btnAdd.addEventListener('click', _ => {
@@ -53,7 +57,7 @@ sortButtons.addEventListener('click', e => {
 })
 
 /**
- * @param {{ name: string, dev: string, endDate: Date, important: boolean }} task 
+ * @param {Task} task 
  * @returns { HTMLTableRowElement }
  */
 function createRow(task) {
