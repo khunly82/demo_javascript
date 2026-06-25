@@ -35,7 +35,7 @@ btnAdd.addEventListener('click', _ => {
 })
 
 
-sortButtons.addEventListener('click', function(e)  {
+sortButtons.addEventListener('click', e => {
     const dset = e.target.dataset
     if(!tasksList.length) return
     let sortedList        
