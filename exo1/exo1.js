@@ -56,8 +56,8 @@ btnComputeAge.addEventListener('click', _ => {
 
 
 /***** EXO 1.3 *****/
-const breakHour = 15
-const breakMinute = 0
+const breakHour = 16
+const breakMinute = 55
 const pRemainingTime = document.getElementById('p-remaining-time')
 
 let current_day = new Date()
@@ -74,17 +74,18 @@ setInterval(() => {
     const diff = break_day - current_day
     if(diff >= 0) {
         // display the remaining time
+        const milliSeconds = diff % 1000
         const totalSecondsRemaining = Math.floor(diff / 1000)
         const secondsRemaining = totalSecondsRemaining % 60
         const minutesRemaining = Math.floor(totalSecondsRemaining / 60) % 60  
         const hoursRemaining = Math.floor(totalSecondsRemaining / 3600)
-        const timeToDisplay = `${hoursRemaining.toString().padStart(2, '0')}:${minutesRemaining.toString().padStart(2, '0')}:${secondsRemaining.toString().padStart(2, '0')}`
+        const timeToDisplay = `${hoursRemaining.toString().padStart(2, '0')}:${minutesRemaining.toString().padStart(2, '0')}:${secondsRemaining.toString().padStart(2, '0')}:${milliSeconds.toString().padStart(3, '0')}`
         pRemainingTime.textContent = timeToDisplay
     } else {
         // display it's time to take a break
-        pRemainingTime.textContent = 'it\'s time to take a break'
+        pRemainingTime.textContent = 'It\'s time to leave !!! See you Tommorow 👻 !!'
     }
-}, 1000);
+}, 1);
 
 
 /***** END EXO 1.3 *****/

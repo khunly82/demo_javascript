@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <form id="form">
+        <div class="row">
+            <div class="col">
+                <label for="input-task-name">Name of the task</label>
+                <input id="input-task-name" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="select-dev">Developer</label>
+                <select id="select-dev">
+                    <option>Aude</option>
+                    <option>Mike</option>
+                    <option>Thierry</option>
+                    <option>Khun</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="input-end-date">End Date</label>
+                <input id="input-end-date" type="date">
+            </div>
+        </div>
+        <div class="row">
+            <label for="input-task-important">Check if important</label>
+            <input id="input-task-important" type="checkbox">
+        </div>
+        <div>
+            <button type="button" id="btn-add">Add</button>
+        </div>
+    </form>
+
+    <div id="sort-buttons">
+        <button data-sort="endDate" data-order="-1">Sort By Date (ASC)</button>
+        <button data-sort="endDate" data-order="1">Sort By Date (DESC)</button>
+        <button data-sort="name" data-order="-1">Sort By Name (ASC)</button>
+        <button data-sort="name" data-order="1">Sort By Name (DESC)</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Developer</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-tasks">
+
+        </tbody>
+    </table>
+</body>
+</html>

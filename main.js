@@ -27,44 +27,92 @@
 // console.log(value == NaN) // false
 // console.log(isNaN(value)) // true
 
-const myP = document.getElementById('my-p')
+// const myP = document.getElementById('my-p')
 
-myP.textContent = 'Hello world !!'
-myP.classList.add('some-class')
-myP.style.color = '#FF0000'
+// myP.textContent = 'Hello world !!'
+// myP.classList.add('some-class')
+// myP.style.color = '#FF0000'
 
-const p = document.querySelector('p')
-p.style.fontWeight = 'bold'
+// const p = document.querySelector('p')
+// p.style.fontWeight = 'bold'
 
-const ps = document.querySelectorAll('p')
-for (let item of ps) {
-    item.style.fontStyle = 'italic'
+// const ps = document.querySelectorAll('p')
+// for (let item of ps) {
+//     item.style.fontStyle = 'italic'
+// }
+
+// console.log(document.body.children)
+
+// const myInput = document.getElementById('my-input')
+// const myInput2 = document.getElementById('my-input-2')
+// const myInput3 = document.getElementById('my-input-3')
+// myInput.value = 'Khun'
+
+// console.log(typeof myInput2.value) // string
+// console.log(typeof myInput2.valueAsNumber) // number
+// console.log(typeof myInput3.value) // string
+// console.log(typeof myInput3.valueAsDate) // date
+
+// console.log(+myInput2.value + 42) // 4242
+// console.log(myInput2.valueAsNumber + 42) // 4242
+
+// myP.textContent = myInput3.valueAsDate.toLocaleDateString()
+
+// const computeDateBtn = document.getElementById('compute-date-btn')
+// const pResult = document.getElementById('p-result')
+
+// computeDateBtn.addEventListener('click', () => {
+//     /** @type {Date} */
+//     const date = myInput3.valueAsDate
+//     const nbDays = myInput2.valueAsNumber
+//     date.setDate(date.getDate() + nbDays)
+//     pResult.textContent = `The date is ${date.toLocaleDateString()}`
+// })
+
+const myObject = {
+    isbn: '999999999999',
+    title: 'The lord of the ring',
+    'number-of-pages': 1000,
+    isInEnglish: true,
+    author: {
+        name: 'Tolkien',
+        nationality: 'usa'
+    },
+    categories: ['Adventure']
 }
 
-console.log(document.body.children)
+const myOtherObject = {
+    isbn: '5654655555',
+    title: 'The bible',
+    author: null
+}
 
-const myInput = document.getElementById('my-input')
-const myInput2 = document.getElementById('my-input-2')
-const myInput3 = document.getElementById('my-input-3')
-myInput.value = 'Khun'
+console.log(myObject.author.name)
+console.log(myObject['author'].name)
 
-console.log(typeof myInput2.value) // string
-console.log(typeof myInput2.valueAsNumber) // number
-console.log(typeof myInput3.value) // string
-console.log(typeof myInput3.valueAsDate) // date
+console.log(myObject['number-of-pages'])
 
-console.log(+myInput2.value + 42) // 4242
-console.log(myInput2.valueAsNumber + 42) // 4242
+// you can't add new property to an object that is sealed
+// Object.seal(myObject)
 
-myP.textContent = myInput3.valueAsDate.toLocaleDateString()
+myObject.releaseDate = new Date(1970, 1, 1)
 
-const computeDateBtn = document.getElementById('compute-date-btn')
-const pResult = document.getElementById('p-result')
+// you can't update any proprterty of an object that frozen
+// Object.freeze(myObject)
+myObject.isbn = '666666666'
 
-computeDateBtn.addEventListener('click', () => {
-    /** @type {Date} */
-    const date = myInput3.valueAsDate
-    const nbDays = myInput2.valueAsNumber
-    date.setDate(date.getDate() + nbDays)
-    pResult.textContent = `The date is ${date.toLocaleDateString()}`
-})
+console.log(myObject)
+
+console.log(Object.getOwnPropertyNames(myObject))
+
+for(const value of Object.values(myObject)) {
+    console.log(value)
+}
+
+console.log(myObject.author?.name ?? 'No Author')
+console.log(myOtherObject.author?.name || 'No Author')
+
+
+const age = 42
+
+console.log(`j\'ai ${age} ans`)
