@@ -13,18 +13,15 @@ const resetBtn = document.getElementById('btn-reset')
 const gameBoard = document.getElementById('game-board')
 
 const values = ['🍔', '👻', '🦄', '🐕', '🐱', '💩', '🐵', '🦁']
-
-/** @type {Card[]} */
-let cards = []
-/** @type {number} */
-let timer = 0
-/** @type {number} */
-let attempts = 0
-/** @type {card} */
-let prev = null
-/** @type {boolean} */
-let wait = false
-let intervalId = null
+const defaultValues = {
+    cards: [],
+    timer: 0,
+    attempts: 0,
+    prev: null,
+    wait: false,
+    intervalId: null
+}
+const game = {...defaultValues}
 
 /**
  * @param {Card} card
@@ -45,7 +42,7 @@ function createEmptyCardElement(card) {
 
 function openCard(card, cardElement) {
     return (/** @type {PointerEvent} */e) => {
-        if(wait) {
+        if(game.wait) {
             e.stopImmediatePropagation()
             return
         }
@@ -67,8 +64,7 @@ function closeCard(card, cardElement) {
 }
 
 function shuffle() {
-    cards = []
-    cards = [...values, ...values].map(v => ({
+    game.cards = [...values, ...values].map(v => ({
         value: v,
         isVisible: false,
         randomSeed: Math.random()
@@ -78,7 +74,7 @@ function shuffle() {
 
 function displayCards() {
     gameBoard.innerHTML = ''
-    gameBoard.append(...cards.map(createEmptyCardElement))
+    gameBoard.append(...game.cards.map(createEmptyCardElement))
 }
 
 /**
@@ -87,16 +83,16 @@ function displayCards() {
 function pairWise(callBack) {
     return (/** @type {PointerEvent} */e) => {
         const idx = e.currentTarget.dataset.idx
-        card = cards[idx]
-        if (!prev) {
-            prev = card
+        card = game.cards[idx]
+        if (!game.prev) {
+            game.prev = card
             return
         }
-        if (card === prev) {
+        if (card === game.prev) {
             return
         }
-        callBack([prev, card])
-        prev = null
+        callBack([game.prev, card])
+        game.prev = null
     } 
 }
 
@@ -104,27 +100,27 @@ function pairWise(callBack) {
  * @param {[Card, Card]} param0 
  */
 function check([card1, card2]) {
-    displayAttempts(++attempts)
+    displayAttempts(++game.attempts)
     if(card1.value !== card2.value) {
         const cardElement1 = gameBoard.children[card1.position]
         const cardElement2 = gameBoard.children[card2.position]
-        wait = true
+        game.wait = true
         setTimeout(() => {
             closeCard(card1, cardElement1)
             closeCard(card2, cardElement2)
-            wait = false
+            game.wait = false
         }, 1000)
-    } else if(cards.every(c => c.isVisible)) {
-        clearInterval(intervalId)
+    } else if(game.cards.every(c => c.isVisible)) {
+        clearInterval(game.intervalId)
     }
 }
 
 function displayAttempts() {
-    attemptsSpan.textContent = attempts
+    attemptsSpan.textContent = game.attempts
 }
 
 function displayTime() {
-    const diff = Date.now() - timer
+    const diff = Date.now() - game.timer
     const minutes = Math.floor(diff / 60000).toString().padStart(2, '0')
     const seconds = (Math.floor(diff / 1000) % 60).toString().padStart(2, '0')
     const ms = (diff % 1000).toString().padStart(3, '0')
@@ -132,7 +128,7 @@ function displayTime() {
 }
 
 async function reset() {
-    const started = cards.some(c => !c.isVisible)
+    const started = game.cards.some(c => !c.isVisible)
     if(started) {
         const result = await openConfirmDialog()
         if (result) {
@@ -144,16 +140,12 @@ async function reset() {
 }
 
 function applyReset() {
-    cards = []
-    timer = Date.now()
-    attempts = 0
-    prev = null
-    wait = false
+    clearInterval(game.intervalId)
+    Object.assign(game, { ...defaultValues, timer: Date.now() })
     shuffle()
     displayCards()
     displayAttempts()
-    clearInterval(intervalId)
-    intervalId = setInterval(displayTime, 1)
+    game.intervalId = setInterval(displayTime, 1)
     gameBoard.querySelectorAll('.card')
         .forEach(c => c.addEventListener('click', pairWise(check)))
 }
