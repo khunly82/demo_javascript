@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+#game-infos {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black;
+    padding: 10px 20px;
+    > div {
+        display: flex;
+        gap: 20px;
+        font-size: 24px;
+    }
+    #timer {
+        font-family: Permanent Marker;
+
+    }
+    #attempts {
+        font-family: Permanent Marker;
+    }
+    #btn-reset {
+        width: 200px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
+#game-board {
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: auto;
+    margin-top: 20px;
+    gap: 25px;
+    .card {
+        aspect-ratio: 1/1.2;
+        border: 1px solid black;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease;
+        transform: rotateY(180deg);
+        &.open {
+            transform: unset;
+        }
+        > div {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            backface-visibility: hidden;
+            border-radius: 5px;
+        }
+        .front{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            background-color: antiquewhite;
+        }
+        .back{
+            background-color: cadetblue;
+            transform: rotateY(180deg);
+        }
+    }  
+}
