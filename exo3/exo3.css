@@ -68,3 +68,22 @@
         }
     }  
 }
+
+.dialog-backdrop {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .dialog {
+        background-color: white;
+        width: 300px;
+        padding: 10px 20px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+}

@@ -131,7 +131,19 @@ function displayTime() {
     timerSpan.textContent = `${minutes}:${seconds}:${ms}`
 }
 
-function reset() {
+async function reset() {
+    const started = cards.some(c => !c.isVisible)
+    if(started) {
+        const result = await openConfirmDialog()
+        if (result) {
+            applyReset()   
+        }
+    } else {
+        applyReset()
+    }
+}
+
+function applyReset() {
     cards = []
     timer = Date.now()
     attempts = 0
@@ -140,9 +152,39 @@ function reset() {
     shuffle()
     displayCards()
     displayAttempts()
+    clearInterval(intervalId)
     intervalId = setInterval(displayTime, 1)
     gameBoard.querySelectorAll('.card')
         .forEach(c => c.addEventListener('click', pairWise(check)))
+}
+
+/**
+ * @returns { Promise<boolean> }
+ */
+function openConfirmDialog() {
+    return new Promise((resolve) => {
+        const dialogBackdrop = document.createElement('div')
+        dialogBackdrop.classList.add('dialog-backdrop')
+        const dialog = document.createElement('div')
+        dialog.classList.add('dialog')
+        const p = document.createElement('p')
+        p.textContent = 'Are you sure ?'
+        const cancelButton = document.createElement('button')
+        cancelButton.textContent = 'Cancel'
+        const okButton = document.createElement('button')
+        okButton.textContent = 'Yes'
+        dialog.append(p, cancelButton, okButton)
+        dialogBackdrop.append(dialog)
+        okButton.addEventListener('click', _ => {
+            dialogBackdrop.remove();
+            resolve(true)
+        })
+        cancelButton.addEventListener('click', _ => {
+            dialogBackdrop.remove()
+            resolve(false)
+        })
+        document.body.append(dialogBackdrop)
+    })
 }
 
 resetBtn.addEventListener('click', reset)

@@ -142,3 +142,21 @@
 // }
 
 // console.log = function() { return ('Trololo') }
+
+// new Promise((resolve, err) => {
+//     console.log('I am waiting for the result')
+//     const nb = Math.random()
+//     setTimeout(() => {
+//         if(nb < 0.5) {
+//             resolve(42)
+//         } else {
+//             err('error ...')
+//         }
+//     }, 5000)
+// }).then(data => {
+//     console.log('Once my promise is resolved i have the value', data);
+// }).catch(err => console.log('error', err))
+
+// setTimeout(() => {
+//     console.log('I can do something else before the promise is resolved')
+// }, 1000)
